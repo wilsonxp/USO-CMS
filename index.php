@@ -9,7 +9,7 @@ include ('admin/iplogger.php'); //IP Address Logging Script
 include ('counter.php'); //Visit Counter Script
 
 
-if ($maintenance=="false")
+if ($maintenance=="true")
 {
     //include('maintenance.php');
     echo "We are working on the site rightnow. It will be back up in a jiffy.";
