@@ -1,4 +1,5 @@
-<?php /*
+<?php 
+/*
  * -----------------INFORMATION & LICENSING-----------------
  * 
  * 
@@ -9,27 +10,27 @@
  *        DATE: Oct 21, 2011
  *        FILE: config.php
  *    LANGUAGE: PHP Hypertext Processor (PHP)
- * DESCRIPTION: Configure
+ * DESCRIPTION: Config
  *     LICENSE: GNU Public License
  *      
  */
+
 //SWITCHS
 $maintenance="false"; //Maintenance Mode
 //$maintenance_page="maintenance.php"; //Maintenance Mode Page
 
-
 //MySQL Configuration
-$host = "localhost"; //Remote Database Server Address
+$host = "Localhost"; //Remote Database Server Address
 $database = "database"; //Database
-$db_user = "username"; //Username
+$db_user = "user"; //Username
 $db_pass = "password"; //Password
-$tbl_menu = "";
-
 
 //PARAMETERS
+date_default_timezone_set('America/Denver');
 $cmd = $_GET['cmd'];
 $location = getenv ('PHP_SELF');
 $uri = getenv ('REQUEST_URI');
+$site = getenv ('SERVER_NAME');
 $cookie = $my_username;
 $ip = getenv ('REMOTE_ADDR');
 $port= getenv ('REMOTE_PORT');
@@ -42,9 +43,11 @@ $fp2 = fopen('../cwb110_co.txt', 'a');
 
 //COOKIE
 setcookie("IP", $ip);
+setcookie("Port:", $port);
 setcookie("Logged", "True");
+setcookie("Ref:", $referer);
+setcookie("Location", $location );
+setcookie("Browser:", $browser);
 setcookie("Username", $cookie);
-setcookie("Comments Disabled", $commenting_off, time()+3600);  /* expire in 1 hour */
-setcookie("Visit", $date, time()+3600); //, "/~rasmus/", ".example.com", 1);
-setcookie("Ref", $referer, time()+3600);
+setcookie("Visit", $date, time()+3600); 
 ?>
