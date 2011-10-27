@@ -53,7 +53,7 @@ else
     {
         $pages_dir = '../fortcarson';
         $pages = scandir($pages_dir, 0);
-        unset($pages[0], $pages[1], $pages[3], $pages[4], $pages[7], $pages[8], $pages[9], $pages[10], $pages[11], $pages[12], $pages[13], $pages[15], $pages[17], $pages[18], $pages[19]);
+        unset($pages[0], $pages[1], $pages[3], $pages[4], $pages[7], $pages[8], $pages[9], $pages[10], $pages[11], $pages[12], $pages[13], $pages[15], $pages[18], $pages[19], $pages[20]);
         
         $page = $_GET['page'];
         //print_r($pages);
