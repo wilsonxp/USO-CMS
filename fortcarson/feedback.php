@@ -11,6 +11,16 @@
             #copyright{text-align: center; color: grey; font-size: x-small;} 
             #text{text-align: center; font-style: normal;}
         </style>
+        <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
+
+      <!-- Wrapping the Recaptcha create method in a javascript function -->
+      <script type="text/javascript">
+         function showRecaptcha(element) {
+           Recaptcha.create("6LcbgckSAAAAANYpfEq5x_ElO3GtFb6fn3n2IzG1", element, {
+             theme: "red",
+             callback: Recaptcha.focus_response_field});
+         }
+      </script>
     </head>
     
     <body>
@@ -109,6 +119,8 @@
                 </p>
                  
                 <p id="center">
+                     <div id="recaptcha_div"></div>
+                     <input type="button" value="Show reCAPTCHA" onclick="showRecaptcha('recaptcha_div');"></input>
                     <input type="submit" name="submit" value="send" />
                 </p>
             </form>
@@ -124,21 +136,37 @@ require_once("../config.php");
 
 if($_SERVER['REQUEST_METHOD'] == "POST") //Validation: Make Sure User Submitted 
 {
-    if (!mysql_connect($host, $db_user, $db_pass)) {die("Database Connect Error");} 
-    if (!mysql_select_db($database)) {die("Database Select Error");}
+    require_once('../admin/recaptchalib.php');
+    $privatekey = "PRIVATE_KEY";
+    $resp = recaptcha_check_answer ($privatekey,
+    $_SERVER["REMOTE_ADDR"],
+    $_POST["recaptcha_challenge_field"],
+    $_POST["recaptcha_response_field"]);
+
+    if (!$resp->is_valid) 
+    {
+    // What happens when the CAPTCHA was entered incorrectly
+    die ("The Verification Image was not entered or wasn't entered correctly."); //"(reCAPTCHA said: " . $resp->error .);
+    } 
+    else 
+    {
+        if (!mysql_connect($host, $db_user, $db_pass)) {die("Database Connect Error");} 
+        if (!mysql_select_db($database)) {die("Database Select Error");}
     
-    $username = ''; //COOKIE
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $message = $_POST['message'];
-    $time = time();
+        $username = ''; //COOKIE
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $message = $_POST['message'];
+        $time = time();
 
-    //Sanitize User Input to Prevent SQLi and XSS Attacks
-    $safename = htmlspecialchars($name); //Convert char to prevent XSS or HTML injection
-    $safeemail = htmlspecialchars($email); //Further sanitize user input
-    $safemessage = mysql_escape_string(stripslashes($message)); //
+        //Sanitize User Input to Prevent SQLi and XSS Attacks
+        $safename = htmlspecialchars($name); //Convert char to prevent XSS or HTML injection
+        $safeemail = htmlspecialchars($email); //Further sanitize user input
+        $safemessage = mysql_escape_string(stripslashes($message)); //
 
-    mysql_query("INSERT INTO feedback VALUES ('', '$name','$email','$message','$time','$ip','$username','')") or die ('Error Submitting Data');
-    echo "Your Message Has Been Sent. Thank You";
+        mysql_query("INSERT INTO feedback VALUES ('', '$name','$email','$message','$time','$ip','$username','')") or die ('Error Submitting Data');
+        echo "Your Message Has Been Sent. Thank You";
+     }
+
 }
 ?>
