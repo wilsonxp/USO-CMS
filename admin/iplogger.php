@@ -12,9 +12,6 @@
  *     LICENSE: GNU Public License      
  */ 
 
-/* START CONFIGURATION */
-require_once ('../config.php');
-/* END CONFIGURATION */
 
 if (!mysql_connect($host, $db_user, $db_pass)) {die($failsafe . mysql_error());}
 if (!mysql_select_db($database)) {die($db_select_error . mysql_error());}
