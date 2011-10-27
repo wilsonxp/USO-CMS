@@ -7,57 +7,37 @@
         <meta name="description" content="USOCMS is a Content Management System (CMS) for displaying information such as food menu, driving direction, acctivities, hours of operation, and more." />
         <meta name="ROBOTS" content="INDEX, FOLLOW" />
         <style>
-            body 
-            {
-                text-align: center;
-            }
+            body {text-align: center;}
         </style>
     </head>
     
     <body>
         <?PHP
-        /* -----------------INFORMATION & LICENSING-----------------
-        *
-        * AUTHOR: Christopher Sparrowgrove
-        * COMPANY: USO CMS
-        * WEBSITE: http://usocms.com
-        * NAME: Index Page
-        * DATE: Oct 21, 2011
-        * FILE: index.php
-        * LANGUAGE: PHP Hypertext Processor (PHP)
-        * DESCRIPTION: Index
-        * LICENSE: GNU Public License
-        *      
-        */
-        
         /* START CONFIGURATION */
-        require_once ('config.php');
-        require_once ('admin/iplogger.php');
-        /* END CONFIGURATION */
+        require_once('config.php');
+        require_once('admin/iplogger.php');
+        /*END CONFIGURATION */
         
         if ($maintenance=="true")
         {
-            echo "We are working on the site rightnow. It will be back in a jiffy.";
-            exit();
+            echo "The Site Is Currently Down. Please Check Back Later";
+            echo "</body></html>";
         }
         else
         {
-            //Make Connection to SQL Server then select database.
-            //Start HTML code for selecting which USO information to view
-            //Option/choices are fed via SQL database
-            if(!mysql_connect($host, $db_user, $db_pass)) { die('Database Connect Error'); }
-            if(!mysql_select_db($database)) { die('Database Select Error');}
-            
             echo '<form action="" method="post" name="Branch_Selection" />';
             echo 'Select Your Local USO: <select name="name">';
             echo '<option size="30" selected>Select</option>';
-            $branches = mysql_query("SELECT * FROM branches");
-            while ($row = mysql_fetch_assoc($branches)) 
-                {
-                    echo '<option name="name">'.$row['name'].'</option>';
-                }
-            echo '<input type="submit" name="submit">';
-            
+            echo '<option name="name">Fort Carson USO</option>';
+            echo '<option name="name">BETA</option>';
+            echo '</select>';
+            echo '<input type="submit" name="submit" />';
+        }
+        ?>
+    </body>
+</html>
+
+<?PHP
             if (isset($_POST[submit]))
             {
                 //If Selected USO was Fort Carson USO the forward to.
@@ -81,8 +61,5 @@
                 {
                     die ('That Location Does Not Exist. An administrator has been notified');   
                 }
-            }
-        }
-        ?>
-    </body>
-</html>
+            }        
+            ?>
