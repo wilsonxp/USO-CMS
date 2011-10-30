@@ -1,4 +1,12 @@
-<?php 
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Users Edit Switch</title>
+        <meta name="robots" content="noindex,nofollow" />
+    </head>
+    
+    <body>
+        <?php 
 /*
  * -----------------INFORMATION & LICENSING-----------------
  * 
@@ -45,7 +53,45 @@ if (isset ($_SESSION['username']))
 }
 else
 {
-    echo "Please Login.";
+    
+    
+    $uid = $_COOKIE['UID'];
+    $os = array("100001880332289", "15413100490", "795685524", "100002784450840");
+    //Autherized Facebook users: Christopher, Chris, Katie, Jessica
+    //echo $uid;
+    if (in_array($uid, $os)) 
+    {
+        $status = $_GET['update'];
+        $con = mysql_connect($host,$db_user,$db_pass);
+        if (!$con){die('Could not connect: ' . mysql_error());}
+        mysql_select_db($db_name, $con);
+    
+        if (is_numeric($status))
+        {
+            if ($status=="1")
+            {
+                 mysql_query("UPDATE uso_config SET edit_users = '1' WHERE id = '1'");
+                 mysql_close($con);
+            }
+            else if ($status=="0")
+            {
+                 mysql_query("UPDATE uso_config SET edit_users = '0' WHERE id = '1'");
+                 mysql_close($con);
+            } 
+            else 
+            {
+                echo "!@Error: Invalid Value";
+            }
+            header ('Location: ../index.php');
+        }
+    }
+    else
+    {
+        //include("../".$fail);
+        //die ('You Must Be Logged In To View This Page. Please Login'); //DISABLED
+        exit();
+    }
 }
-
-header('Location: http://usocms.com/fortcarson/ul/');
+?>
+    </body>
+</html>
