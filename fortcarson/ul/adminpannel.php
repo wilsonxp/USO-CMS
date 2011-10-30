@@ -15,17 +15,11 @@
  */ 
 require_once('../../config.php');
  
- $con = mysql_connect($host,$db_user,$db_pass);
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
+if (!mysql_connect($host,$db_user,$db_pass)){die('Database Connect Error ');}
+if (!mysql_select_db($database)){die('Database Select Error ');}
 
-mysql_select_db($db_name, $con);
-
-$result = mysql_query("SELECT * FROM uso_config");
-
-while($row = mysql_fetch_array($result))
+$config = mysql_query("SELECT * FROM config");
+while($row = mysql_fetch_assoc($config))
   {
    $registration = $row['registration_status'];
    $useredit = $row['edit_users'];
@@ -34,7 +28,7 @@ while($row = mysql_fetch_array($result))
    $directionsedit = $row['edit_directions'];
    $activitiesedit = $row['edit_activities'];
   }
-  
+
  //User Editing
  if ($useredit=="1")
  {
