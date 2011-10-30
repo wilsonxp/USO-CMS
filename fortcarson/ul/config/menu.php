@@ -15,7 +15,7 @@
  *     WEBSITE: http://3xsecurityservices.com
  *        NAME: Admin Pannel Users Config
  *        DATE: Oct 11, 2011
- *        FILE: menu.php
+ *        FILE: users.php
  *    LANGUAGE: PHP Hypertext Processor (PHP)
  * DESCRIPTION: Enable or Disable Configuration 
  *     LICENSE: Free to use. Do not change anything
@@ -33,22 +33,22 @@ include ('../../../admin/iplogger.php');
 if (isset ($_SESSION['username']))
 {
     $status = $_GET['update'];
-    $con = mysql_connect($host,$db_user,$db_pass);
-    if (!$con){die('Could not connect: ' . mysql_error());}
-    mysql_select_db($db_name, $con);
+    if (!mysql_connect($host,$db_user,$db_pass)){die('Database Connect Error ');}
+    if (!mysql_select_db($database)){die('Database Select Error ');}
     
     if (is_numeric($status))
-    {
+    {     
         if ($status=="1")
         {
-            mysql_query("UPDATE uso_config SET edit_menu = '1' WHERE id = '1'");
+            mysql_query("UPDATE config SET edit_menu = '1' WHERE id = '1'");
             mysql_close($con);
         }
         else if ($status=="0")
         {
-            mysql_query("UPDATE uso_config SET edit_menu = '0' WHERE id = '1'");
+            mysql_query("UPDATE config SET edit_menu = '0' WHERE id = '1'");
             mysql_close($con);
-        }            
+        }      
+        header('Location: http://usocms.com/fortcarson/ul');
     }
 }
 else
@@ -62,27 +62,26 @@ else
     if (in_array($uid, $os)) 
     {
         $status = $_GET['update'];
-        $con = mysql_connect($host,$db_user,$db_pass);
-        if (!$con){die('Could not connect: ' . mysql_error());}
-        mysql_select_db($db_name, $con);
+        if (!mysql_connect($host,$db_user,$db_pass)){die('Database Connect Error ');}
+        if (!mysql_select_db($database)){die('Database Select Error ');}
     
         if (is_numeric($status))
         {
             if ($status=="1")
             {
-                 mysql_query("UPDATE uso_config SET edit_menu = '1' WHERE id = '1'");
+                 mysql_query("UPDATE config SET edit_menu = '1' WHERE id = '1'");
                  mysql_close($con);
             }
             else if ($status=="0")
             {
-                 mysql_query("UPDATE uso_config SET edit_menu = '0' WHERE id = '1'");
+                 mysql_query("UPDATE config SET edit_menu = '0' WHERE id = '1'");
                  mysql_close($con);
             } 
             else 
             {
                 echo "!@Error: Invalid Value";
             }
-            header ('Location: ../index.php');
+            header('Location: http://usocms.com/fortcarson/ul');
         }
     }
     else
