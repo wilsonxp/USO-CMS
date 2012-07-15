@@ -1,0 +1,17 @@
+/* Portions are Copyright (C) 2007 Apple Inc. All Rights Reserved. */
+body 
+{
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    font-family: 'Lucida Grande', Verdana, sans-serif;
+    font-weight: bold;
+    /* Turn off font resizing */
+    -webkit-text-size-adjust: none;   
+}
+
+#container {width: 320px; width: 329px; background-color: white;}
+#menu {height:270px; width:330px; border:1px solid grey; color:black;}
+#grey{background-color:grey;}
+#version {text-align: center; font-size:6px;}
+#navi {font-size: 6px;}

@@ -1,0 +1,89 @@
+/* 
+    Document   : style
+    Created on : Nov 15, 2011, 9:24:48 PM
+    Author     : cdsparrowgrove
+    Description: Style Sheet
+*/
+
+body {
+font: normal 8pt/13pt verdana, arial,sans-serif;
+color: black;
+margin: 5px;
+padding: 5px;
+background-color:grey;
+}
+
+/*Home Page: home.php */
+#wrapper {
+width: 632px;
+margin: 0 auto;
+text-align: left;
+background-color: grey;/*#999*/
+/*box-shadow: 10px 10px 5px #888888;*/
+border:5px solid #FF9933;
+}
+#adspace {
+width: 632px;
+height: 80px;
+background-color: activeborder;
+text-align: center;
+}
+#content {
+background-color: green;
+width: 630px;
+height: 100%;
+padding: 0px 1px 0px 1px;
+text-align: left;
+}
+
+#header {
+width: 610px;
+height: 94px;
+background-color: #ccc; /*#ccc*/
+font-weight: bold;
+font-size: 8pt;
+padding-top: 6px;
+padding-left: 20px;
+}
+
+/*                    Menu                   */
+#menu {
+width: 130px;
+height: 100%;
+margin: 0px;
+float: left;
+text-align: left;
+background-color: whitesmoke;
+}
+#stuff {
+background: #999;
+float: right;
+width: 475px;
+margin: 10px 10px 0 4px;
+padding: 0px 0px 50px 0px;
+}
+#bottom {
+color: #ccc;
+background: #999;
+clear: both;
+width: 600px;
+height: 35px;
+padding-left: 30px;
+padding-top: 10px;
+background: url(images/bottom.png) no-repeat;
+}
+
+#bottom a, #bottom a:visited{
+color: #ccc;
+}
+
+#bottom a:hover {
+color: #808080;
+}
+
+
+#profilepic
+{
+width: 60px;
+heigth:60px;
+}
